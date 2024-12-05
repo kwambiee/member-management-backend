@@ -1,0 +1,21 @@
+import { createRole, getRoles } from "../services/role.service";
+
+import { Request, Response } from "express";
+
+export const createRoleController = async (req: Request, res: Response) => {
+  try {
+    const role = await createRole(req.body);
+    res.status(201).json(role);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
+export const getRolesController = async (req: Request, res: Response) => {
+  try {
+    const roles = await getRoles();
+    res.status(200).json(roles);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
