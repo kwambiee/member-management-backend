@@ -21,7 +21,7 @@ const member_model_1 = __importDefault(require("../models/member.model"));
 const activity_log_model_1 = __importDefault(require("../models/activity_log.model"));
 const sequelize = new core_1.Sequelize({
     dialect: "sqlite",
-    storage: "./database.sqlite", // Path to the local file where data will be stored
+    storage: "/tmp/database.sqlite", // Path to the local file where data will be stored
     pool: { max: 1, idle: Infinity, maxUses: Infinity },
     models: [user_model_1.default, role_model_1.default, member_model_1.default, activity_log_model_1.default],
     // write data to the database file
