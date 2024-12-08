@@ -1,20 +1,22 @@
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import dotenv from "dotenv";
 import User from "../models/user.model";
 
-console.log(process.env.JWT_SECRET)
+dotenv.config();
 
+type JwtOptions = {
+  jwtFromRequest: (req: Request) => string | null;
+  secretOrKey: string;
+};
 
-const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET as any,
+const jwt_options: JwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET!,
 };
 
 const jwtVerify = async (payload: any, done: any) => {
     try {
-        if(payload.type !== "access") {
-            throw new Error("Invalid token type");
-        }
         const user = await User.findByPk(payload.sub);
         if (!user) {
             return done(null, false);
@@ -25,10 +27,8 @@ const jwtVerify = async (payload: any, done: any) => {
     }
 };
 
-const jwtStrategy = new JwtStrategy(jwtOptions, jwtVerify);
-
-passport.use(jwtStrategy);
-
-export default jwtStrategy;
+console.log("Registering JWT Strategy...");
+passport.use("jwt", new JwtStrategy(jwt_options, jwtVerify));
+console.log("JWT Strategy registered.");
 
 

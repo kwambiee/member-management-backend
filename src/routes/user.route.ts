@@ -1,4 +1,5 @@
 import { Router } from "express";
+import passport from "passport";
 
 import {
   getUserByIdController,
@@ -8,16 +9,17 @@ import {
   deleteUserController,
   loginController,
 } from "../controllers/user.controller";
-import { authenticate } from "../middleware/auth";
+
+import "../config/passport";
 
 
 const router = Router();
 
 router.post("/", createUserController);
-router.get("/", authenticate(),getUsersController);
-router.get("/:id", getUserByIdController);
-router.put("/:id", updateUserController);
-router.delete("/:id", deleteUserController);
+router.get("/", passport.authenticate('jwt', { session: false }),getUsersController);
+router.get("/:id", passport.authenticate('jwt', { session: false }), getUserByIdController);
+router.put("/:id",  passport.authenticate('jwt', { session: false }),updateUserController);
+router.delete("/:id",  passport.authenticate('jwt', { session: false }), deleteUserController);
 router.post("/login", loginController);
 
 export default router;
