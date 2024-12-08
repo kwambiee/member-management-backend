@@ -7,6 +7,14 @@ type UserType = {
     roleId: number;
 }
 
+export const getUserByEmail = async (email: string) => {
+    return await User.findOne({
+        where: {
+            email
+        }
+    })
+};
+
 export const createUser = async (userData: UserType) => {
   if (!userData.email || !userData.password ) {
     throw new Error("email and password are required");

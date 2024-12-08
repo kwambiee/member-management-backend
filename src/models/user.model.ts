@@ -1,5 +1,6 @@
 import { profile } from "console";
 import uniqid from "uniqid";
+import { Sequelize } from "@sequelize/core";
 import {
   Table,
   Attribute,
@@ -8,7 +9,11 @@ import {
   NotNull,
   Default,
   BelongsTo,
+  BeforeCreate,
+  BeforeUpdate,
 } from "@sequelize/core/decorators-legacy";
+
+import bcrypt from "bcrypt";
 
 
 
@@ -54,6 +59,29 @@ export class User extends Model<
   @Attribute(DataTypes.INTEGER)
   @Default(2) // Default role
   declare roleId: number; // References Role table
+
+  // encrypt password
+  @BeforeCreate
+  static async hashPassword(user: User) {
+    if (user.password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, salt);
+    }
+  }
+
+  // Hook to hash password before updating the user
+  @BeforeUpdate
+  static async hashPasswordBeforeUpdate(user: User) {
+    if (user.password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, salt);
+    }
+  }
+
+  // // Method to compare passwords
+  // async isValidPassword(password: string): Promise<boolean> {
+  //   return bcrypt.compare(password, this.password);
+  // }
 }
 
 
