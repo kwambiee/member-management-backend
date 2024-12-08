@@ -27,7 +27,6 @@ export const loginController = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body as LoginType;
     const user = await getUserByEmail(email);
-    console.log(user, "user")
     if (!user) {
       throw new Error("User not found");
     }
