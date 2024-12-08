@@ -14,9 +14,12 @@ const app = express();
 
 app.use(express.json());
 
-// app.use(passport.initialize());
-// passport.use(jwtStrategy);
 app.use(bodyParser.json());
+
+//post a welcome message to the root route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to the API" });
+});
 
 app.use("/roles", roleRoutes);
 app.use("/users", userRoutes);
