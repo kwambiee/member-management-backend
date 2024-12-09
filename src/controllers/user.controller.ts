@@ -41,6 +41,10 @@ export const loginController = async (req: Request, res: Response) => {
   }
 };
 
+export const logOutController = async (req: Request, res: Response) => {
+  res.status(200).json({ message: "Logged out" });
+};
+
 export const createUserController = async (req: Request, res: Response) => {
   try {
     const user = await createUser(req.body as UserType);

@@ -8,6 +8,7 @@ import {
   createUserController,
   deleteUserController,
   loginController,
+  logOutController
 } from "../controllers/user.controller";
 
 import "../config/passport";
@@ -21,5 +22,7 @@ router.get("/:id", passport.authenticate('jwt', { session: false }), getUserById
 router.put("/:id",  passport.authenticate('jwt', { session: false }),updateUserController);
 router.delete("/:id",  passport.authenticate('jwt', { session: false }), deleteUserController);
 router.post("/login", loginController);
+router.post("/logout", passport.authenticate('jwt', { session: false }), logOutController);
+
 
 export default router;
