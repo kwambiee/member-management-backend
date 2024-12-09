@@ -14,4 +14,5 @@ router.get("/:id", passport_1.default.authenticate('jwt', { session: false }), u
 router.put("/:id", passport_1.default.authenticate('jwt', { session: false }), user_controller_1.updateUserController);
 router.delete("/:id", passport_1.default.authenticate('jwt', { session: false }), user_controller_1.deleteUserController);
 router.post("/login", user_controller_1.loginController);
+router.post("/logout", passport_1.default.authenticate('jwt', { session: false }), user_controller_1.logOutController);
 exports.default = router;

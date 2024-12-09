@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRolesController = exports.createRoleController = void 0;
+exports.deleteRoleController = exports.getRolesController = exports.createRoleController = void 0;
 const role_service_1 = require("../services/role.service");
 const createRoleController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -31,3 +31,13 @@ const getRolesController = (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.getRolesController = getRolesController;
+const deleteRoleController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const role = yield (0, role_service_1.deleteRole)(Number(req.params.id));
+        res.status(200).json(role);
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+exports.deleteRoleController = deleteRoleController;

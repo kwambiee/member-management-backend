@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRoles = exports.createRole = void 0;
+exports.deleteRole = exports.getRoles = exports.createRole = void 0;
 const role_model_1 = __importDefault(require("../models/role.model"));
 const createRole = (roleData) => __awaiter(void 0, void 0, void 0, function* () {
     if (!roleData.roleName) {
@@ -25,3 +25,7 @@ const getRoles = () => __awaiter(void 0, void 0, void 0, function* () {
     return yield role_model_1.default.findAll();
 });
 exports.getRoles = getRoles;
+const deleteRole = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield role_model_1.default.destroy({ where: { id } });
+});
+exports.deleteRole = deleteRole;

@@ -15,3 +15,7 @@ export const createRole = async (roleData: RoleType) => {
 export const getRoles = async () => {
   return await Role.findAll();
 };
+
+export const deleteRole = async (id: number) => {
+  return await Role.destroy({ where: { id } });
+}

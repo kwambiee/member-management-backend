@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUserController = exports.updateUserController = exports.getUserByIdController = exports.getUsersController = exports.createUserController = exports.loginController = void 0;
+exports.deleteUserController = exports.updateUserController = exports.getUserByIdController = exports.getUsersController = exports.createUserController = exports.logOutController = exports.loginController = void 0;
 const user_service_1 = require("../services/user.service");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -35,6 +35,10 @@ const loginController = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.loginController = loginController;
+const logOutController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(200).json({ message: "Logged out" });
+});
+exports.logOutController = logOutController;
 const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, user_service_1.createUser)(req.body);
