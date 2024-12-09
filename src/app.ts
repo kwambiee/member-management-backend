@@ -7,14 +7,21 @@ import memberRoutes from "./routes/member.route";
 import activityLogRoutes from "./routes/activity_log.route";
 import dotenv from "dotenv";
 import { errorMiddleware } from "./middleware/error";
+var {cors} = require("cors");
+
 
 import path from "path";
 
 const app = express();
 
 app.use(express.json());
-
 app.use(bodyParser.json());
+app.use(cors(
+  {
+    origin:'*',
+    credentials: true
+  }
+));
 
 //post a welcome message to the root route
 app.get("/", (req, res) => {

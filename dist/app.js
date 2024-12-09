@@ -10,9 +10,14 @@ const user_route_1 = __importDefault(require("./routes/user.route"));
 const member_route_1 = __importDefault(require("./routes/member.route"));
 const activity_log_route_1 = __importDefault(require("./routes/activity_log.route"));
 const error_1 = require("./middleware/error");
+var { cors } = require("cors");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
+app.use(cors({
+    origin: '*',
+    credentials: true
+}));
 //post a welcome message to the root route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to the API" });
