@@ -24,6 +24,14 @@ export const getMemberById = async (id: string) => {
   return await Member.findByPk(id);
 }
 
+export const getMemberByUserId = async (userId: string) => {
+  return await Member.findOne({
+    where: {
+      userId
+    }
+  })
+}
+
 export const updateMember = async (id: string, memberData: MemberType) => {
   return await Member.update(memberData, {
     where: {

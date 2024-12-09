@@ -49,11 +49,11 @@ export class ActivityLogs extends Model<
 //   declare userId: string; // References user table
 
   // This is the association
-  @BelongsTo(() => Member, "memberId")
-  declare member?: Member;
+  // @BelongsTo(() => Member, "memberId")
+  // declare member?: Member;
 
-  @Attribute(DataTypes.INTEGER)
-  declare memberId: number; // References Role table
+  // @Attribute(DataTypes.INTEGER)
+  // declare memberId: number; // References Role table
 
 }
 

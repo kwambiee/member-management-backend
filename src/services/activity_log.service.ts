@@ -3,11 +3,11 @@ import ActivityLogs from "../models/activity_log.model";
 type ActivityLogType = {
     action: string;
     description: string;
-    memberId: number;
+    // memberId: number;
 }
 
 export const createActivityLog = async (activityLogData: ActivityLogType) => {
-    if (!activityLogData.action || !activityLogData.description || !activityLogData.memberId) {
+    if (!activityLogData.action || !activityLogData.description) {
         throw new Error("action, description and memberId are required");
     }
     return await ActivityLogs.create(activityLogData as ActivityLogType);
