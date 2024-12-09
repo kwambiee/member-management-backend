@@ -15,8 +15,10 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
 app.use(cors({
-    origin: '*',
-    credentials: true
+    // allow server to accept request from all origin
+    origin: ['*', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
 }));
 //post a welcome message to the root route
 app.get("/", (req, res) => {
