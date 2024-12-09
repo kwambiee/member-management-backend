@@ -16,8 +16,14 @@ const app = express();
 
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
-app.options('*', cors());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
 
 //post a welcome message to the root route
 app.get("/", (req, res) => {
