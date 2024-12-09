@@ -8,7 +8,7 @@ import ActivityLogs from "../models/activity_log.model";
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: process.env.DATABASE_URL,// database file
+  storage: "/tmp/database.sqlite",
   pool: { max: 1, idle: Infinity, maxUses: Infinity },
   models: [User, Role, Member, ActivityLogs],
   // write data to the database file
