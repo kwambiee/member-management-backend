@@ -11,9 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteMemberController = exports.updateMemberController = exports.getMemberByIdController = exports.getMembersController = exports.createMemberController = void 0;
 const member_service_1 = require("../services/member.service");
+const activity_log_service_1 = require("../services/activity_log.service");
 const createMemberController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const member = yield (0, member_service_1.createMember)(req.body);
+        yield (0, activity_log_service_1.createActivityLog)({ action: "create", description: `${member.firstName} ${member.lastName} created` });
         res.status(201).json(member);
     }
     catch (error) {
@@ -43,7 +45,9 @@ const getMemberByIdController = (req, res) => __awaiter(void 0, void 0, void 0, 
 exports.getMemberByIdController = getMemberByIdController;
 const updateMemberController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const member = yield (0, member_service_1.updateMember)(req.params.id, req.body);
+        yield (0, member_service_1.updateMember)(req.params.id, req.body);
+        const member = yield (0, member_service_1.getMemberById)(req.params.id);
+        yield (0, activity_log_service_1.createActivityLog)({ action: "create", description: `${member === null || member === void 0 ? void 0 : member.firstName} ${member === null || member === void 0 ? void 0 : member.lastName} created` });
         res.status(200).json(member);
     }
     catch (error) {
@@ -53,7 +57,9 @@ const updateMemberController = (req, res) => __awaiter(void 0, void 0, void 0, f
 exports.updateMemberController = updateMemberController;
 const deleteMemberController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const member = yield (0, member_service_1.deleteMember)(req.params.id);
+        const member = yield (0, member_service_1.getMemberById)(req.params.id);
+        yield (0, member_service_1.deleteMember)(req.params.id);
+        yield (0, activity_log_service_1.createActivityLog)({ action: "delete", description: `${member === null || member === void 0 ? void 0 : member.firstName} ${member === null || member === void 0 ? void 0 : member.lastName} deleted` });
         res.status(200).json(member);
     }
     catch (error) {

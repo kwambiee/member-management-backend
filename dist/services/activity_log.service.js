@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteActivityLog = exports.updateActivityLog = exports.getActivityLogById = exports.getActivityLogs = exports.createActivityLog = void 0;
 const activity_log_model_1 = __importDefault(require("../models/activity_log.model"));
 const createActivityLog = (activityLogData) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!activityLogData.action || !activityLogData.description || !activityLogData.memberId) {
+    if (!activityLogData.action || !activityLogData.description) {
         throw new Error("action, description and memberId are required");
     }
     return yield activity_log_model_1.default.create(activityLogData);

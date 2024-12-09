@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMember = exports.updateMember = exports.getMemberById = exports.getMembers = exports.createMember = void 0;
+exports.deleteMember = exports.updateMember = exports.getMemberByUserId = exports.getMemberById = exports.getMembers = exports.createMember = void 0;
 const member_model_1 = __importDefault(require("../models/member.model"));
 const createMember = (memberData) => __awaiter(void 0, void 0, void 0, function* () {
     if (!memberData.firstName || !memberData.lastName || !memberData.userId) {
@@ -29,6 +29,14 @@ const getMemberById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return yield member_model_1.default.findByPk(id);
 });
 exports.getMemberById = getMemberById;
+const getMemberByUserId = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield member_model_1.default.findOne({
+        where: {
+            userId
+        }
+    });
+});
+exports.getMemberByUserId = getMemberByUserId;
 const updateMember = (id, memberData) => __awaiter(void 0, void 0, void 0, function* () {
     return yield member_model_1.default.update(memberData, {
         where: {

@@ -8,14 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActivityLogs = void 0;
 const decorators_legacy_1 = require("@sequelize/core/decorators-legacy");
 const core_1 = require("@sequelize/core");
-const member_model_1 = __importDefault(require("./member.model"));
 let ActivityLogs = class ActivityLogs extends core_1.Model {
 };
 exports.ActivityLogs = ActivityLogs;
@@ -34,14 +30,6 @@ __decorate([
     decorators_legacy_1.NotNull,
     __metadata("design:type", String)
 ], ActivityLogs.prototype, "description", void 0);
-__decorate([
-    (0, decorators_legacy_1.BelongsTo)(() => member_model_1.default, "memberId"),
-    __metadata("design:type", member_model_1.default)
-], ActivityLogs.prototype, "member", void 0);
-__decorate([
-    (0, decorators_legacy_1.Attribute)(core_1.DataTypes.INTEGER),
-    __metadata("design:type", Number)
-], ActivityLogs.prototype, "memberId", void 0);
 exports.ActivityLogs = ActivityLogs = __decorate([
     (0, decorators_legacy_1.Table)({
         tableName: "activity_logs",
