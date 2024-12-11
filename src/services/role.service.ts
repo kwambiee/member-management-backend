@@ -1,15 +1,8 @@
-import Role from "../models/role.model"
+import Role from "../models/role.model";
 
 type RoleType = {
-    roleName: "admin" | "user";
-    id?: number
-}
-
-export const createRole = async (roleData: RoleType) => {
-  if (!roleData.roleName) {
-    throw new Error("roleName is required");
-  }
-  return await Role.create(roleData as RoleType);
+  roleName: "Admin" | "User" | "Member";
+  id?: string;
 };
 
 export const getRoles = async () => {
@@ -18,4 +11,4 @@ export const getRoles = async () => {
 
 export const deleteRole = async (id: number) => {
   return await Role.destroy({ where: { id } });
-}
+};

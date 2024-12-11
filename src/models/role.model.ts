@@ -1,4 +1,5 @@
 import { profile } from "console";
+import { v4 as uuidv4 } from "uuid";
 import {
   Table,
   Attribute,
@@ -27,14 +28,13 @@ export class Role extends Model<
   InferCreationAttributes<Role>
 > {
   @PrimaryKey
-  @Attribute(DataTypes.INTEGER)
-  declare id: CreationOptional<number>;
+  @Attribute(DataTypes.UUIDV4)
+  @Default(() => uuidv4())
+  declare id: CreationOptional<string>;
 
-  @Attribute(DataTypes.ENUM("admin", "user"))
-  @Default("user") // Default role
-  declare roleName: "admin" | "user";
-
+  @Attribute(DataTypes.ENUM("Admin", "User", "Member"))
+  @Default("User") // Default role
+  declare roleName: "Admin" | "User" | "Member";
 }
-
 
 export default Role;
