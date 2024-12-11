@@ -1,22 +1,22 @@
 import User from "../models/user.model";
 
 type UserType = {
-    email: string;
-    password: string;
-    username: string;
-    roleId: number;
-}
+  email: string;
+  password: string;
+  username: string;
+  roleId: string;
+};
 
 export const getUserByEmail = async (email: string) => {
-    return await User.findOne({
-        where: {
-            email
-        }
-    })
+  return await User.findOne({
+    where: {
+      email,
+    },
+  });
 };
 
 export const createUser = async (userData: UserType) => {
-  if (!userData.email || !userData.password ) {
+  if (!userData.email || !userData.password) {
     throw new Error("email and password are required");
   }
   return await User.create(userData as UserType);
@@ -27,21 +27,21 @@ export const getUsers = async () => {
 };
 
 export const getUserById = async (id: string) => {
-    return await User.findByPk(id);
-}
+  return await User.findByPk(id);
+};
 
 export const updateUser = async (id: string, userData: UserType) => {
-    return await User.update(userData, {
-        where: {
-            id
-        }
-    })
-}
+  return await User.update(userData, {
+    where: {
+      id,
+    },
+  });
+};
 
 export const deleteUser = async (id: string) => {
-    return await User.destroy({
-        where: {
-            id
-        }
-    })
-}
+  return await User.destroy({
+    where: {
+      id,
+    },
+  });
+};

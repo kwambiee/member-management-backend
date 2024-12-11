@@ -1,6 +1,7 @@
 import { profile } from "console";
 import uniqid from "uniqid";
 import { Sequelize } from "@sequelize/core";
+import { v4 as uuidv4 } from "uuid";
 import {
   Table,
   Attribute,
@@ -15,8 +16,6 @@ import {
 
 import bcrypt from "bcrypt";
 
-
-
 import {
   DataTypes,
   Model,
@@ -25,7 +24,7 @@ import {
   type CreationOptional,
 } from "@sequelize/core";
 import { sequelize } from "../config/database";
-import Role from "./role.model"
+import Role from "./role.model";
 
 @Table({
   tableName: "users",
@@ -36,8 +35,8 @@ export class User extends Model<
   InferCreationAttributes<User>
 > {
   @PrimaryKey
-  @Default(() => uniqid()) // Use a unique string generator
-  @Attribute(DataTypes.STRING)
+  @Attribute(DataTypes.UUIDV4)
+  @Default(() => uuidv4())
   declare id: CreationOptional<string>;
 
   @Attribute(DataTypes.STRING)
@@ -56,9 +55,8 @@ export class User extends Model<
   @BelongsTo(() => Role, "roleId")
   declare role?: Role;
 
-  @Attribute(DataTypes.INTEGER)
-  @Default(2) // Default role
-  declare roleId: number; // References Role table
+  @Attribute(DataTypes.UUIDV4)
+  declare roleId: string; // References Role table
 
   // encrypt password
   @BeforeCreate
@@ -83,6 +81,5 @@ export class User extends Model<
   //   return bcrypt.compare(password, this.password);
   // }
 }
-
 
 export default User;
