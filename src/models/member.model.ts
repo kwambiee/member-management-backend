@@ -57,6 +57,7 @@ export class Member extends Model<
   declare user?: User;
 
   @Attribute(DataTypes.STRING)
+  @NotNull
   declare userId: string; 
   
 }

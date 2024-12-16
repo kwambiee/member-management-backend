@@ -29,7 +29,7 @@ export const createMemberController = async (req: Request, res: Response) => {
       hasProfile: true,
     });
   } 
-    await createActivityLog({action: "create", description: "created their profile", userId: member?.userId || ""});
+    await createActivityLog({action: "create", description: "created their profile", userId: member?.userId });
     res.status(201).json(member);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
