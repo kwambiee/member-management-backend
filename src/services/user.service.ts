@@ -31,7 +31,7 @@ export const getUserById = async (id: string) => {
   return await User.findByPk(id);
 };
 
-export const updateUser = async (id: string, userData: UserType) => {
+export const updateUser = async (id: string, userData: any) => {
   return await User.update(userData, {
     where: {
       id,

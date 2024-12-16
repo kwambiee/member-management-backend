@@ -57,6 +57,11 @@ export const logOutController = async (req: Request, res: Response) => {
 
 export const createUserController = async (req: Request, res: Response) => {
   try {
+    // Check if user already exists
+    const userExists = await getUserByEmail(req.body.email);
+    if (userExists) {
+      throw new Error("User already exists");
+    }
     const user = await createUser(req.body as UserType);
     if (!process.env.JWT_SECRET) {
       throw new Error("JWT_SECRET is not defined in environment variables");

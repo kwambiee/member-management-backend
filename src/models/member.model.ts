@@ -57,8 +57,7 @@ export class Member extends Model<
   declare user?: User;
 
   @Attribute(DataTypes.STRING)
-  declare userId: string; // References Role table
-
+  declare userId: string; 
   
 }
 

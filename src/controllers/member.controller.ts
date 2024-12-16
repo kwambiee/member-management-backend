@@ -23,15 +23,12 @@ export const createMemberController = async (req: Request, res: Response) => {
   try {
     const member = await createMember(req.body as MemberType);
     // userModel
-    const user = await getUserById(member.userId);
-    if (user) {
-      await updateUser(member.userId, {
-        ...user,
-        hasProfile: true,
-      });
-    } else {
-      throw new Error("User data is incomplete");
-    }
+    const user = await getUserById(member?.userId);
+  if (user) {
+    await updateUser(member?.userId, {
+      hasProfile: true,
+    });
+  } 
     await createActivityLog({action: "create", description: "created their profile", userId: member?.userId || ""});
     res.status(201).json(member);
   } catch (error: any) {

@@ -89,7 +89,5 @@ export class User extends Model<
 }
 
 export default User;
-function unique(target: User, propertyKey: "email"): void {
-  throw new Error("Function not implemented.");
-}
+
 
